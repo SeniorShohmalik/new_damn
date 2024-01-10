@@ -1,0 +1,441 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+
+<script src="https://unpkg.com/htmx.org@1.9.0/dist/htmx.js"></script>
+
+<body>
+
+  <!--  ro'yxattan o'tish uchun -->
+
+  {% if login %}
+  <div class="main">
+    <div class="content">
+      <div class="text">LOG IN</div>
+
+      <form
+        method="POST"
+        action="{% url 'kirish' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+
+        <label for="username">Username</label>
+        <input
+
+          type="text"
+          placeholder="Email or Phone"
+          id="username"
+          name="username"
+          autocomplete="new-password"
+          required
+        />
+        <div
+          class="err"
+          style="
+            font-size: 12px;
+            color: #088178;
+            margin-top: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bolder;
+          "
+        ></div>
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          id="password"
+          name="password"
+          autocomplete="new-password"
+          required
+        />
+        <div
+          class="label"
+          style="
+            font-size: 12px;
+            color: #088178;
+            margin-top: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bolder;
+          "
+        ></div>
+
+        <button class="button" type="submit">Log In</button>
+        <a
+          href="{% url 'register_user' %}"
+          style="color: rgb(124, 122, 122); text-decoration: none"
+        >
+          Ro'yxattan o'tish
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- ro'yxattan o'tish uchun -->
+  {% elif sign %}
+
+  <div class="main">
+    <div class="content">
+      <div class="text">Sign Up</div>
+
+      <form
+        method="POST"
+        action="{% url 'register_user' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+
+        <label for="username">Username</label>
+        <input
+          type="text"
+          placeholder="Username"
+          id="username"
+          autocomplete="new-password"
+          required
+          name="username"
+          value="{{ user.ism.username }}"
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          placeholder="Email"
+          id="email"
+          autocomplete="new-password"
+          required
+          name="email"
+          value="{{ user.ism.email }}"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          id="password"
+          autocomplete="new-password"
+          required
+          name="password"
+        />
+
+        <label for="number">Number</label>
+        <input
+          type="text"
+          placeholder="+998"
+          id="number"
+          autocomplete="new-password"
+          required
+          name="number"
+          value="{{ user.contact }}"
+        />
+
+        <label for="info">Bio</label>
+        <input
+          type="text"
+          placeholder="#Bog' ishini yaxshi ko'ruvchi"
+          id="info"
+          autocomplete="new-password"
+          required
+          value="{{ user.info }}"
+          name="info"
+        />
+
+        <label for="fileInput" class="custom-file-input">
+          <span>Choose File</span>
+          <input type="file" id="fileInput" name="image" required />
+        </label>
+
+        <button name="submit" type="submit" class="button">Sign Up</button>
+        <a
+          href="{% url 'kirish' %}"
+          style="color: rgb(124, 122, 122); text-decoration: none"
+          >Kirish</a
+        >
+      </form>
+    </div>
+  </div>
+
+  <!-- foydalanuvchi malumotlarini tahrirlash uchun -->
+  {% elif sign and user %}
+  <div class="main">
+    <div class="content">
+      <div class="text">Sign Up</div>
+
+      <form
+        method="POST"
+        action="{% url 'signup' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input
+          type="text"
+          placeholder="Username"
+          id="username"
+          autocomplete="new-password"
+          required
+          name="username"
+          value="{{user.ism.username}}"
+        />
+
+        <label for="password">Email</label>
+        <input
+          type="email"
+          placeholder="Email"
+          id="password"
+          autocomplete="new-password"
+          required
+          name="email"
+          value="{{user.ism.email}}"
+        />
+
+        <label for="username">Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          id="username"
+          autocomplete="new-password"
+          required
+          name="password"
+        />
+
+        <label for="username">Number</label>
+        <input
+          type="text"
+          placeholder="+998"
+          id="username"
+          autocomplete="new-password"
+          required
+          name="number"
+          value="{{user.contact}}"
+        />
+
+        <label for="username">Bio</label>
+        <input
+          type="text"
+          placeholder="#Bog' ishini yaxshi ko'ruvchi"
+          id="username"
+          autocomplete="new-password"
+          required
+          value="{{user.info}}"
+          name="info"
+        />
+
+        <label for="fileInput" class="custom-file-input">
+          <span>Choose File</span>
+          <input
+            type="file"
+            id="fileInput"
+            name="fileInput"
+            required
+            value="{{user.rasm}}"
+          />
+        </label>
+
+        <button name="submit" type="submit" class="button">Sign Up</button>
+        <a
+          href="{% url 'register_l' %}"
+          style="color: rgb(124, 122, 122); text-decoration: none"
+        >
+          Kirish
+        </a>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  <style>
+    body {
+      background-color: #e3e6f3;
+      width: 100vw;
+    }
+
+    body::-webkit-scrollbar {
+      background-color: transparent;
+      width: 0;
+    }
+    .err {
+      font-size: 12px;
+      color: #811a08;
+    }
+
+    .corr {
+      font-size: 12px;
+      color: #088178;
+    }
+    .main,
+    .content {
+      margin: 50 auto;
+    }
+
+    .content {
+      width: 330px;
+      height: auto;
+      background: #dcdff1;
+      padding: 30px 35px 40px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .text {
+      font-size: 30px;
+      color: #000000;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+    #times {
+      position: absolute;
+      right: 20px;
+      top: 5px;
+      font-size: 25px;
+      background: #dcdff1;
+      padding: 3px;
+      padding-left: 11px;
+      padding-right: 11px;
+      border-radius: 50%;
+
+      box-shadow: -4px -4px 7px #fffdfdb7, 3px 3px 5px rgba(94, 104, 121, 0.24);
+      cursor: pointer;
+    }
+
+    form {
+      margin-top: 40px;
+    }
+
+    label {
+      display: block;
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    input {
+      display: block;
+      height: 43px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 3px;
+      border: none;
+      box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      padding-left: 15px;
+    }
+
+    ::placeholder {
+      color: #555;
+    }
+
+    .button {
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 35px;
+      font-size: 17px;
+      font-weight: 700;
+      box-shadow: -4px -4px 7px #fffdfdb7, 3px 3px 5px rgba(94, 104, 121, 0.388);
+      background: #dcdff1;
+      border: none;
+      margin-bottom: 32px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .button:hover {
+      box-shadow: inset -3px -3px 7px #ffffffb0,
+        inset 3px 3px 5px rgba(94, 104, 121, 0.692);
+    }
+
+    .custom-file-input {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .custom-file-input span {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .custom-file-input input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    #header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #e3e6f3;
+      padding: 20px 80px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      z-index: 999;
+      height: auto;
+    }
+
+    .header-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-list-nav ul {
+      display: flex;
+    }
+    .header-list-nav ul li {
+      list-style-type: none;
+      padding: 0 20px;
+      position: relative;
+    }
+    .header-list-nav ul a {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      transition: 0.3s ease;
+    }
+    .header-list-nav ul a:hover,
+    .header-list-nav ul a.active {
+      color: #088178;
+      content: "";
+    }
+    .header-list-icon a {
+      color: #1a1a1a;
+      padding-left: 20px;
+      transition: 0.3s ease;
+    }
+    .header-list-icon a:hover,
+    .header-list-nav ul a.active {
+      color: #088178;
+    }
+    .header-list-nav ul li a:hover::after,
+    .header-list-nav ul li a.active::after {
+      content: "";
+      width: 30%;
+      height: 2px;
+      background: #088178;
+      position: absolute;
+      bottom: -4px;
+      left: 20px;
+    }
+  </style>
+
+  <script>
+    let CSRF_TOKEN = "{{ csrf_token }}";
+    document.body.addEventListener("htmx:configRequest", (event) => {
+      event.detail.headers["X-CSRFToken"] = CSRF_TOKEN;
+    });
+  </script>
+</body>

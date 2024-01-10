@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Filter and Search Box</title>
+</head>
+<body>
+    <div class="filter-container">
+        <input type="text" id="searchBox" placeholder="Search...">
+        <select id="filterDropdown">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+</body>
+
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.filter-container {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchBox,
+#filterDropdown {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#searchBox::placeholder {
+    color: #aaa;
+}
+
+#searchBox:focus,
+#filterDropdown:focus {
+    border-color: #5cb85c;
+}
+
+#filterDropdown {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#filterDropdown option {
+    padding: 10px;
+}
+
+#filterDropdown:hover {
+    background-color: #f9f9f9;
+}
+
+#filterDropdown:focus {
+    outline: none;
+}
+
+
+</style>
+</html>

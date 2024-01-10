@@ -1,0 +1,147 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'header.css' %}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+
+<script src="https://unpkg.com/htmx.org@1.9.0/dist/htmx.js"></script>
+
+!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+<header>
+  <div id="header">
+    <div class="header-logo">
+      <a href="{% url 'bosh_sahifa' %}"  style="text-decoration: none;"
+        >        <h2 style="color: #088178;">𝓜𝓪𝓭𝓪𝓭
+        </h2></a>
+    </div>
+    <div class="header-list">
+      <nav class="header-list-nav">
+        <ul>
+          <li><a class="active" href="{% url 'bosh_sahifa' %}">Home</a></li>
+          <li>
+            <a href="{% url 'register_user' %}"
+              ><i class="fa-solid fa-arrow-right-to-bracket"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-list-icon">
+        <a href="{% url 'profile' %}" style="position: relative"
+          ><i class="fa-solid fa-user"></i
+        ></a>
+        <a href="{% url 'saqlangan_mahsulotlar' %}" style="position: relative"
+          ><i class="fa-solid fa-code"></i
+        ></a>
+        {% if user %}
+        <span id="span">{{ user.total }}</span>
+        {% else %} {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="main">
+    {% for product in products %}
+
+        {% include 'product.html' %}
+
+    {% endfor %}
+    
+</div>
+
+
+
+
+<style>
+  .product-cart{
+    display: inline-block !important;
+    margin: 10px !important;
+  }
+    .main{
+    margin-top: 100px;
+  }
+    #span {
+      font-size: 10px;
+      background-color: #088178;
+      border-radius: 50%;
+      padding: 5px;
+      color: white;
+      position: absolute;
+      top: 20px;
+    }
+    #span {
+    font-size: 10px;
+    background-color: #088178;
+    border-radius: 50%;
+    padding: 5px;
+    color: white;
+    position: absolute;
+    top: 20px;
+  }
+
+  header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  *{
+      text-align: center;
+    }
+    body::-webkit-scrollbar {
+      background-color: transparent;
+    width: 0;
+}
+    i{
+      color: #088178;
+      border: none;
+      outline: none;
+      margin-left: 5px;
+      font-size: 15px;
+      background-color: transparent;
+    }
+    i#i:hover  {
+        color: goldenrod /* Hover color */
+    }
+
+   i#i:nth-child(1):hover ~ i#i , i#i:nth-child(1) {
+        color: goldenrod
+    }
+
+   i#i:nth-child(2):hover ~ i#i , i#i:nth-child(1) {
+        color: goldenrod
+    }
+
+   i#i:nth-child(3):hover ~ i#i {
+        color: goldenrod
+    }
+
+   i#i:nth-child(4):hover ~ i#i {
+        color: goldenrod
+    }
+
+    i#i:nth-child(5):hover ~ i#i {
+        color: goldenrod
+    }
+
+  #span{
+
+    font-size: 10px;
+    background-color: #088178;
+    border-radius: 50%;
+    padding: 5px;
+    color: white;
+    position: absolute;
+    top: 20px;
+  }
+  </style>
